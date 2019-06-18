@@ -2,10 +2,11 @@
 var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
     'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
     't', 'u', 'v', 'w', 'x', 'y', 'z'];
-var wins = 0;
+var emptyArr = [];
+var win = 0;
 var losses = 0;
 var guesses = 9;
-var attempts;
+
 
 // Create variables that hold references to the places in the HTML where we want to display things.
 
@@ -14,6 +15,9 @@ var lossScore = document.getElementById("loss-score");
 var guessesLeft = document.getElementById("guess-left");
 var lettersGuessed = document.getElementById("letters-guessed");
 
+// Randomly chooses a choice from the options array. This is the Computer's guess.
+var randomLetter = letters[Math.floor(Math.random() * letters.length)];
+console.log("Computer Guesss:", randomLetter);
 // This function is run whenever the user presses a key.
 document.onkeyup = function (event) {
 
@@ -21,28 +25,62 @@ document.onkeyup = function (event) {
     // Determines which key was pressed.
     var userGuess = event.key;
 
-    // Randomly chooses a choice from the options array. This is the Computer's guess.
-    var randomLetter = letters[Math.floor(Math.random() * letters.length)];
-
-    //   for (var i = 0; i < letters.length; i++);
-
-    if (userGuess === letters) {
+    if (letters.includes(userGuess)) {
         if (userGuess === randomLetter) {
             win++;
+            console.log("WIN");
         }
         else {
-            losses++;
+            guesses--;
         }
 
+    if (guesses === 0){
+        losses++ 
+        console.log(losses);
+    } 
+
+
+        // if (guesses === 0) {
+        // losses++
+        // }
+
+        // This function takes the user input and displays the characters 
+        // function guessedSoFar() {
+        //     for (var i = 0; i < letters.length; i++) {
+        //         // emptyArr.push();
+        //     } lettersGuessed.textContent = emptyArr[i];
+        // }
+
+
+function guessedSoFar(){
+for (var i = 0; i < letters.length; i++) {
+  
+  var foundMatch = false;
+  for (var j = 0; j <= guessedSoFar.length; j++){
+    
+    if (guessedSoFar[j] === letters[i]);
+    {
+      foundMatch = true;
+      break;
+    } 
+  }console.log("inside first for loop");
+  if (!foundMatch) {
+    guessedSoFar.push(letters[i]);
+  } console.log("inside second for loop")
+} 
+}
+
         // Display the user and computer guesses, and wins/losses/ties.
-        winScore.textContent = "WinS: " + win++;
-        lossScore.textContent = "Losses: " + losses++;
-        guessesLeft.textContent = "Guesses Made: " + guesses--;
-        lettersGuessed.textContent = "attempts made: " + attempts++;
-    }
-};
+        winScore.textContent = "WinS: " + win;
+        lossScore.textContent = "Losses: " + losses;
+        guessesLeft.textContent = "Guesses Made: " + guesses;
+        lettersGuessed.textContent = emptyArr;
 
 
+        guessedSoFar(userGuess);
+    };
+
+}
 
 // <!DOCTYPE html>
 // <html lang="en-us">
